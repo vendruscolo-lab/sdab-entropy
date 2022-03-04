@@ -1,0 +1,91 @@
+# RESTART
+MOLINFO MOLTYPE=protein STRUCTURE=template.pdb
+WHOLEMOLECULES ENTITY0=1-1914
+# DEBUG DETAILED_TIMERS
+
+# AB over backbone
+ALPHABETA ...
+    ATOMS1=@phi-99 REFERENCE=pi
+    ATOMS2=@phi-100
+    ATOMS3=@phi-101
+    ATOMS4=@phi-102
+    ATOMS5=@phi-103
+    ATOMS6=@phi-104
+    ATOMS7=@phi-105
+    ATOMS8=@phi-106
+    ATOMS9=@phi-107
+    ATOMS10=@phi-108
+    ATOMS11=@phi-109
+    ATOMS12=@phi-110
+    ATOMS13=@phi-111
+    ATOMS14=@phi-112
+    ATOMS15=@phi-113
+    ATOMS16=@phi-114
+    ATOMS17=@phi-115
+    ATOMS18=@phi-116
+    ATOMS19=@phi-117
+    ATOMS20=@psi-99
+    ATOMS21=@psi-100
+    ATOMS22=@psi-101
+    ATOMS23=@psi-102
+    ATOMS24=@psi-103
+    ATOMS25=@psi-104
+    ATOMS26=@psi-105
+    ATOMS27=@psi-106
+    ATOMS28=@psi-107
+    ATOMS29=@psi-108
+    ATOMS30=@psi-109
+    ATOMS31=@psi-110
+    ATOMS32=@psi-111
+    ATOMS33=@psi-112
+    ATOMS34=@psi-113
+    ATOMS35=@psi-114
+    ATOMS36=@psi-115
+    ATOMS37=@psi-116
+    ATOMS38=@psi-117
+    LABEL=abbb
+... ALPHABETA
+
+# AB over sidechains
+ALPHABETA ...
+    ATOMS1=@chi1-99 REFERENCE=pi
+    ATOMS2=@chi1-100
+    ATOMS3=@chi1-101
+    ATOMS4=@chi1-103
+    ATOMS5=@chi1-104
+    ATOMS6=@chi1-105
+    ATOMS7=@chi1-106
+    ATOMS8=@chi1-107
+    ATOMS9=@chi1-108
+    ATOMS10=@chi1-109
+    ATOMS11=@chi1-110
+    ATOMS12=@chi1-111
+    ATOMS13=@chi1-112
+    ATOMS14=@chi1-113
+    ATOMS15=@chi1-114
+    ATOMS16=@chi1-115
+    ATOMS17=@chi1-116
+    ATOMS18=@chi1-117
+    LABEL=absc
+... ALPHABETA
+
+# Alpha-helix for CDR
+helix: ALPHARMSD RESIDUES=99-117 TYPE=DRMSD LESS_THAN={RATIONAL R_0=0.08 NN=8 MM=12}
+
+# Beta-sheet for CDR
+anti: ANTIBETARMSD RESIDUES=99-117 TYPE=DRMSD LESS_THAN={RATIONAL R_0=0.08 NN=8 MM=12}
+
+PBMETAD ...
+    LABEL=pbmetad
+    ARG=abbb,absc,helix.lessthan,anti.lessthan
+    PACE=500 HEIGHT=1.2 BIASFACTOR=24 WALKERS_MPI
+    SIGMA=1.5,0.5,2.0,1.5
+    FILE=HILLS_abbb,HILLS_absc,HILLS_helix,HILLS_anti
+    GRID_MIN=-1,-1,-1,-1
+    GRID_MAX=50,20,100,100
+    GRID_WFILES=GRID_abbb,GRID_absc,GRID_helix,GRID_anti
+    GRID_RFILES=GRID_abbb,GRID_absc,GRID_helix,GRID_anti
+    GRID_WSTRIDE=10000
+... PBMETAD
+
+PRINT STRIDE=500 FILE=BIAS ARG=abbb,absc,helix.lessthan,anti.lessthan,pbmetad.bias
