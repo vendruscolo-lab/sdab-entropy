@@ -1,7 +1,7 @@
-Comparison of the conformational entropy of designed and natural nanobodies
-===========================================================================
+Conformational Entropy as a Potential Liability of Computationally Designed Antibodies
+======================================================================================
 
-This repository contains the full analysis code to reproduce our results on the conformational landscape of designed single-domain antibodies.
+This repository contains the full analysis code to reproduce our results on the conformational landscape of designed single-domain antibodies, [published in Biomolecules](https://www.mdpi.com/2218-273X/12/5/718).
 
 Reproducibility information
 ---------------------------
