@@ -9,7 +9,7 @@ Simulations were run using GROMACS 2019.3 and PLUMED 2.6 (git commit 8859093) wi
 
 Dataset
 -------
-The full dataset including trajectories can be found on Zenodo. It includes the following data:
+The full dataset including trajectories can be found on [Zenodo](https://zenodo.org/record/6576260). It includes the following data:
 
 - `simulations/`: Gromacs `tpr` runtime files and PLUMED input
 - `trajectories/`: `xtc` trajectories, deposited Gaussian hills, PLUMED post-processing script and computed total bias (to calculate the per-frame weight)
